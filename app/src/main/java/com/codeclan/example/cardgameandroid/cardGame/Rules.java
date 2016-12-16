@@ -1,4 +1,4 @@
-package com.codeclan.example.cardgameandroid;
+package com.codeclan.example.cardgameandroid.cardGame;
 
 import java.util.*;
 
