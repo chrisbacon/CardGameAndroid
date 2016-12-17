@@ -1,5 +1,9 @@
 package com.codeclan.example.cardgameandroid;
 
+import com.codeclan.example.cardgameandroid.cardGame.Card;
+import com.codeclan.example.cardgameandroid.cardGame.Rank;
+import com.codeclan.example.cardgameandroid.cardGame.Suit;
+
 import org.junit.Before;
 import org.junit.Test;
 
