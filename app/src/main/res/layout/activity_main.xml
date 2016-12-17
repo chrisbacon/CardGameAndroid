@@ -8,15 +8,22 @@
         android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button
+    <LinearLayout
+        android:id="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/twist"
-        android:text="@string/twist_button_text"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/stick"
-        android:text="@string/stick_button_text"
-    />
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/twist"
+            android:text="@string/twist_button_text"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/stick"
+            android:text="@string/stick_button_text"
+            />
+    </LinearLayout>
+
 </LinearLayout>

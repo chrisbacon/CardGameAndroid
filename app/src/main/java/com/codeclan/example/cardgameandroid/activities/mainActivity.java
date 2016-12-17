@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.*;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codeclan.example.cardgameandroid.R;
@@ -17,7 +18,7 @@ public class mainActivity extends AppCompatActivity {
     TextView playerHand;
     Button twist;
     Button stick;
-
+    LinearLayout buttons;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,8 @@ public class mainActivity extends AppCompatActivity {
         twist = (Button)findViewById(R.id.twist);
         stick = (Button)findViewById(R.id.stick);
 
+        buttons = (LinearLayout)findViewById(R.id.buttons);
+
         playerHand.setText(view.displayCurrentPlayerHand());
 
         twist.setOnClickListener(new android.view.View.OnClickListener() {
@@ -52,9 +55,20 @@ public class mainActivity extends AppCompatActivity {
                 game.handleMove();
                 playerHand.setText(view.displayCurrentPlayerHand());
 
-                if (!log.getPlaying() || log.getBust()) {
-                    twist.setVisibility(android.view.View.INVISIBLE);
+                if (log.getBust()) {
+                    buttons.setVisibility(android.view.View.INVISIBLE);
                 }
+            }
+        });
+
+        stick.setOnClickListener(new android.view.View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                view.getPlayerMove("stick");
+                game.handleMove();
+                playerHand.setText(view.displayCurrentPlayerHand());
+
+                buttons.setVisibility(android.view.View.INVISIBLE);
             }
         });
 
