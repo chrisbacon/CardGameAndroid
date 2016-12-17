@@ -18,9 +18,26 @@ public class mainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log log = new Log();
+        Game game = new Game(log);
+        View view = new View(log);
+
+        game.addPlayer("Player");
+        game.addDealer("Dealer");
+
+        game.setUp();
+        game.dealCardToCurrentPlayer();
+        game.dealCardToDealer();
+
         setContentView(R.layout.activity_main);
 
-        welcomeText = (TextView)findViewById(R.id.welcome_text);
+
+
+        playerHand = (TextView)findViewById(R.id.player_hand);
+        
+        playerHand.setText(view.displayCurrentPlayerHand());
+
+
 
 
     }
