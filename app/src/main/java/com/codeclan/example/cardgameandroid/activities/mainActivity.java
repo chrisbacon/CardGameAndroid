@@ -11,7 +11,8 @@ import com.codeclan.example.cardgameandroid.cardGame.*;
  * Created by user on 16/12/2016.
  */
 public class mainActivity extends AppCompatActivity {
-    TextView welcomeText;
+    TextView playerHand;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -7,17 +7,17 @@ public class View {
         this.log = log;
     }
 
-    public void displayCurrentPlayerHand() {
+    public String displayCurrentPlayerHand() {
         Player player = this.log.getCurrentPlayer();
-        System.out.println(player.getName() + ": " + player.getHandString());
+        return player.getName() + ": " + player.getHandString();
     }
 
-    public void displayDealerHand() {
+    public String displayDealerHand() {
         Dealer dealer = this.log.getDealer();
-        System.out.println(dealer.getName() + ": " + dealer.getHandString());
+        return dealer.getName() + ": " + dealer.getHandString();
     }
 
-    public void displayResult() {
+    public String displayResult() {
         Player winner = this.log.getWinner();
         Player loser = this.log.getLoser();
         String output;
@@ -32,13 +32,11 @@ public class View {
             output = this.log.getCurrentPlayer().getName() + " went bust with " + this.log.getCurrentPlayer().getHandValue();
         }
 
-        System.out.println(output); 
+        return output;
 
     }
 
-    public void getPlayerMove() {
-        System.out.println("Stick or Twist?: ");
-        String move = System.console().readLine().toLowerCase();
+    public void getPlayerMove(String move) {
         this.log.setMove(move);
     }
 }
