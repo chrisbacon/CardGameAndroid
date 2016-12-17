@@ -22,7 +22,7 @@ public class mainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log log = new Log();
+        final Log log = new Log();
         final Game game = new Game(log);
         final View view = new View(log);
 
@@ -45,7 +45,13 @@ public class mainActivity extends AppCompatActivity {
             @Override
             public void onClick(android.view.View v) {
                 game.dealCardToCurrentPlayer();
+                view.getPlayerMove("twist");
+                game.handleMove();
                 playerHand.setText(view.displayCurrentPlayerHand());
+
+                if (!log.getPlaying() || log.getBust()) {
+                    twist.setVisibility(android.view.View.INVISIBLE);
+                }
             }
         });
 
