@@ -23,10 +23,16 @@ public class Rules{
     }
 
     public static boolean didDraw(Player player, Dealer dealer) {
-        return player.getHandValue() == dealer.getHandValue();
+        return (player.getHandValue() == dealer.getHandValue()) && (player.getHandSize() > dealer.getHandSize());
     }
 
     public static boolean didPlayerWin(Player player, Dealer dealer) {
-        return (player.getHandValue() > dealer.getHandValue()) && (player.getHandSize() > dealer.getHandSize());
+
+        boolean playerHasHigherValue = player.getHandValue() > dealer.getHandValue();
+        boolean playerHasSameValueButMoreCards = (player.getHandValue() == dealer.getHandValue()
+                && (player.getHandSize() > dealer.getHandSize()));
+        boolean playerHasBlackJack = (player.getHandValue() == 21 && player.getHandSize() == 2);
+
+        return playerHasBlackJack || playerHasHigherValue || playerHasSameValueButMoreCards;
     }
 }

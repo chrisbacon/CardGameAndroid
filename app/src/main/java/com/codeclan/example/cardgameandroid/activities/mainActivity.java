@@ -77,8 +77,6 @@ public class mainActivity extends AppCompatActivity {
                 game.handleMove();
                 playerHand.setText(view.displayCurrentPlayerHand());
 
-                buttons.setVisibility(android.view.View.INVISIBLE);
-
                 game.nextPlayer();
 
                 while (log.getPlaying() && !log.getBust()) {
@@ -86,6 +84,7 @@ public class mainActivity extends AppCompatActivity {
                     dealerHand.setText(view.displayDealerHand());
                 }
 
+                buttons.setVisibility(android.view.View.INVISIBLE);
                 game.setResult();
                 result.setText(view.displayResult());
 
