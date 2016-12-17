@@ -20,6 +20,9 @@ public class mainActivity extends AppCompatActivity {
     Button stick;
     LinearLayout buttons;
 
+    TextView dealerHand;
+    TextView result;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,10 @@ public class mainActivity extends AppCompatActivity {
 
 
         playerHand = (TextView)findViewById(R.id.player_hand);
+        dealerHand = (TextView)findViewById(R.id.dealer_hand);
+        result = (TextView)findViewById(R.id.result);
+
+
         twist = (Button)findViewById(R.id.twist);
         stick = (Button)findViewById(R.id.stick);
 
@@ -57,6 +64,8 @@ public class mainActivity extends AppCompatActivity {
 
                 if (log.getBust()) {
                     buttons.setVisibility(android.view.View.INVISIBLE);
+                    game.setResult();
+                    result.setText(view.displayResult());
                 }
             }
         });
@@ -69,6 +78,17 @@ public class mainActivity extends AppCompatActivity {
                 playerHand.setText(view.displayCurrentPlayerHand());
 
                 buttons.setVisibility(android.view.View.INVISIBLE);
+
+                game.nextPlayer();
+
+                while (log.getPlaying() && !log.getBust()) {
+                    game.runDealerTurn();
+                    dealerHand.setText(view.displayDealerHand());
+                }
+
+                game.setResult();
+                result.setText(view.displayResult());
+
             }
         });
 
