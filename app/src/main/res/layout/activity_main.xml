@@ -13,4 +13,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/twist"
         android:text="@string/twist_button_text"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stick"
+        android:text="@string/stick_button_text"
+    />
 </LinearLayout>

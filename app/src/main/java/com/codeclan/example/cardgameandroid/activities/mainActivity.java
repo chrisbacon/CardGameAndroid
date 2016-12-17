@@ -16,6 +16,7 @@ import com.codeclan.example.cardgameandroid.cardGame.View;
 public class mainActivity extends AppCompatActivity {
     TextView playerHand;
     Button twist;
+    Button stick;
 
 
     @Override
@@ -39,6 +40,8 @@ public class mainActivity extends AppCompatActivity {
 
         playerHand = (TextView)findViewById(R.id.player_hand);
         twist = (Button)findViewById(R.id.twist);
+        stick = (Button)findViewById(R.id.stick);
+
         playerHand.setText(view.displayCurrentPlayerHand());
 
         twist.setOnClickListener(new android.view.View.OnClickListener() {
