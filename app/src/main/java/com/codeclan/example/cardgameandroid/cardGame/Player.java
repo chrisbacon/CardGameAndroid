@@ -33,9 +33,7 @@ public class Player {
     }
 
     public Hand getHand() {
-        Hand currentHand = this.hand;
-        this.hand = new Hand();
-        return currentHand;
+        return new Hand(this.hand);
     }
 
     public String getHandString() {
