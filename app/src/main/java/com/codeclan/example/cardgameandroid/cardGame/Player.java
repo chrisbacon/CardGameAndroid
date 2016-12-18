@@ -1,5 +1,8 @@
 package com.codeclan.example.cardgameandroid.cardGame;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Player {
     private Hand hand;
     private String name;
@@ -28,6 +31,8 @@ public class Player {
     public int getHandValue() {
         return this.hand.getValue();
     }
+
+    public ArrayList<Card> getHand() { return this.hand.getCards(); }
 
     public String getHandString() {
         return this.hand.toString();
