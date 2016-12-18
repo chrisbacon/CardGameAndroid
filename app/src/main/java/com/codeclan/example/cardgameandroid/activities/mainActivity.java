@@ -1,5 +1,6 @@
 package com.codeclan.example.cardgameandroid.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.*;
@@ -18,6 +19,7 @@ public class mainActivity extends AppCompatActivity {
     TextView playerHand;
     Button twist;
     Button stick;
+    Button reset;
     LinearLayout buttons;
 
     TextView dealerHand;
@@ -49,6 +51,7 @@ public class mainActivity extends AppCompatActivity {
 
         twist = (Button)findViewById(R.id.twist);
         stick = (Button)findViewById(R.id.stick);
+        reset = (Button)findViewById(R.id.reset);
 
         buttons = (LinearLayout)findViewById(R.id.buttons);
 
@@ -87,6 +90,16 @@ public class mainActivity extends AppCompatActivity {
                 buttons.setVisibility(android.view.View.INVISIBLE);
                 game.setResult();
                 result.setText(view.displayResult());
+
+            }
+        });
+
+        reset.setOnClickListener(new android.view.View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
             }
         });

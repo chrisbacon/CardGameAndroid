@@ -1,5 +1,7 @@
 package com.codeclan.example.cardgameandroid.cardGame;
 
+import java.util.ArrayList;
+
 public class Hand extends CardCollection {
 
     public Hand() {
@@ -11,6 +13,10 @@ public class Hand extends CardCollection {
             Card cardRemoved = this.cards.remove(0);
             dealer.addCardToDeck(cardRemoved); 
         }       
+    }
+
+    public ArrayList<Card> getCards() {
+        return new ArrayList<Card>(cards);
     }
 
     public int getValue() {
