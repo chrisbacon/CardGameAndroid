@@ -1,5 +1,7 @@
 package com.codeclan.example.cardgameandroid.cardGame;
 
+import java.util.ArrayList;
+
 public class Dealer extends Player {
 
     private Deck deck;
@@ -24,5 +26,13 @@ public class Dealer extends Player {
 
     public void addCardToDeck(Card card) {
         this.deck.addCard(card);
+    }
+
+    public void getHandFromPlayer(Player player) {
+        Hand playerHand = player.getHand();
+        ArrayList<Card> cards = playerHand.getCards();
+        for (Card card : cards) {
+            addCardToDeck(card);
+        }
     }
 }

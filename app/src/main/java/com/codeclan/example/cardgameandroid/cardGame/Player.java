@@ -32,7 +32,11 @@ public class Player {
         return this.hand.getValue();
     }
 
-    public ArrayList<Card> getHand() { return this.hand.getCards(); }
+    public Hand getHand() {
+        Hand currentHand = this.hand;
+        this.hand = new Hand();
+        return currentHand;
+    }
 
     public String getHandString() {
         return this.hand.toString();

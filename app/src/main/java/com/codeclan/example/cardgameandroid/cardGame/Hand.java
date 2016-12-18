@@ -9,6 +9,11 @@ public class Hand extends CardCollection {
         super();
     }
 
+    public Hand(Hand hand) {
+        super();
+        this.cards = new ArrayList<Card>(hand.getCards());
+    }
+
     public void returnCardsToDealer(Dealer dealer){
         while (getSize() > 0) {
             Card cardRemoved = cards.remove(0);
@@ -18,10 +23,6 @@ public class Hand extends CardCollection {
 
     public ArrayList<Card> getCards() {
         return new ArrayList<Card>(cards);
-    }
-
-    public void emptyHand() {
-        cards.clear();
     }
 
     public int getValue() {
