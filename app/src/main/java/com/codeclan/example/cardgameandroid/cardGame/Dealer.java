@@ -28,11 +28,12 @@ public class Dealer extends Player {
         this.deck.addCard(card);
     }
 
-    public void getHandFromPlayer(Player player) {
+    public void getHandFromPlayerAndAddToDeck(Player player) {
         Hand playerHand = player.getHand();
         ArrayList<Card> cards = playerHand.getCards();
         for (Card card : cards) {
             addCardToDeck(card);
         }
+        player.emptyHand();
     }
 }

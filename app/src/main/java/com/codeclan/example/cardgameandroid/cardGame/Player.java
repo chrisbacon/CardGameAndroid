@@ -36,6 +36,10 @@ public class Player {
         return new Hand(this.hand);
     }
 
+    public void emptyHand() {
+        hand.emptyCards();
+    }
+
     public String getHandString() {
         return this.hand.toString();
     }

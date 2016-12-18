@@ -25,6 +25,9 @@ public class Hand extends CardCollection {
         return new ArrayList<Card>(cards);
     }
 
+    public void emptyCards() {
+        cards.clear();
+    }
     public int getValue() {
         return Rules.getHandValue(this.cards);
     }

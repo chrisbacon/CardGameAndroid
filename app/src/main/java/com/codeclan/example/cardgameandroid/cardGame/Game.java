@@ -75,7 +75,10 @@ public class Game {
         } else {
             log.setWinner(dealer);
             log.setLoser(player);
-            
         }
+    }
+
+    public void endRound() {
+        dealer.getHandFromPlayerAndAddToDeck(log.getCurrentPlayer());
     }
 }

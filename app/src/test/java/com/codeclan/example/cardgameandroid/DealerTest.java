@@ -3,6 +3,7 @@ package com.codeclan.example.cardgameandroid;
 import com.codeclan.example.cardgameandroid.cardGame.Card;
 import com.codeclan.example.cardgameandroid.cardGame.Dealer;
 import com.codeclan.example.cardgameandroid.cardGame.Deck;
+import com.codeclan.example.cardgameandroid.cardGame.Player;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,5 +32,28 @@ public class DealerTest {
         Card card = mock(Card.class);
         dealer.addCardToDeck(card);
         assertEquals(1, dealer.getDeckSize());
+    }
+
+    @Test
+    public void dealerIntegrationTest() {
+        Player player = new Player("Chris");
+        Deck deck = new Deck();
+        deck.buildDeck();
+        Dealer dealer = new Dealer("Logan", deck);
+
+        dealer.dealCardTo(player);
+        dealer.dealCardTo(player);
+        dealer.dealCardTo(player);
+        dealer.dealCardTo(player);
+        dealer.dealCardTo(player);
+
+
+        assertEquals(5, player.getHandSize());
+        assertEquals(47, dealer.getDeckSize());
+
+        dealer.getHandFromPlayerAndAddToDeck(player);
+
+        assertEquals(0, player.getHandSize());
+        assertEquals(52, dealer.getDeckSize());
     }
 }
