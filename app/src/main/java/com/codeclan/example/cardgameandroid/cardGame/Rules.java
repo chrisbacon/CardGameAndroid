@@ -23,7 +23,7 @@ public class Rules{
     }
 
     public static boolean didDraw(Player player, Dealer dealer) {
-        return (player.getHandValue() == dealer.getHandValue()) && (player.getHandSize() > dealer.getHandSize());
+        return (player.getHandValue() == dealer.getHandValue()) && (player.getHandSize() == dealer.getHandSize());
     }
 
     public static boolean didPlayerWin(Player player, Dealer dealer) {
