@@ -79,6 +79,8 @@ public class Game {
     }
 
     public void endRound() {
-        dealer.getHandFromPlayerAndAddToDeck(log.getCurrentPlayer());
+        dealer.getHandFromPlayerAndAddToDeck(player);
+        dealer.getHandFromPlayerAndAddToDeck(dealer);
+        log.setCurrentPlayer(player);
     }
 }

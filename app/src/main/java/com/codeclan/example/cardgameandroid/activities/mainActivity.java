@@ -97,9 +97,16 @@ public class mainActivity extends AppCompatActivity {
         reset.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
+                game.endRound();
+                game.setUp();
+                game.dealCardToCurrentPlayer();
+                game.dealCardToDealer();
+
+                playerHand.setText(view.displayCurrentPlayerHand());
+                dealerHand.setText("");
+                result.setText("");
+
+                buttons.setVisibility(android.view.View.VISIBLE);
 
             }
         });
