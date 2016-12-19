@@ -4,42 +4,55 @@
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/player_hand"
-        android:text="@string/welcome_string"
-        android:textSize="30sp"
+        style="@style/HandTextTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        style="@style/HandTextTheme"
         android:id="@+id/dealer_hand"/>
-    <LinearLayout
-        android:id="@+id/buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/twist"
-            android:text="@string/twist_button_text"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/stick"
-            android:text="@string/stick_button_text"
-            />
-    </LinearLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:id="@+id/result"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reset_button_text"
-        android:id="@+id/reset"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_weight="1">
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_weight="1"
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:id="@+id/twist"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:text="@string/twist_button_text"/>
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/stick"
+                android:text="@string/stick_button_text"
+                />
+        </LinearLayout>
+
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reset_button_text"
+            android:id="@+id/reset"/>
+    </LinearLayout>
 
 </LinearLayout>
