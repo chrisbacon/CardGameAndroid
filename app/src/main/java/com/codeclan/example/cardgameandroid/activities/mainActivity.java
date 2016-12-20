@@ -1,5 +1,6 @@
 package com.codeclan.example.cardgameandroid.activities;
 
+import android.animation.LayoutTransition;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -64,7 +65,12 @@ public class mainActivity extends AppCompatActivity {
         playerHand = (LinearLayout)findViewById(R.id.player_hand);
         dealerHand = (LinearLayout)findViewById(R.id.dealer_hand);
 
-        addImagesTo(playerHand);
+        LayoutTransition lt = new LayoutTransition();
+        lt.disableTransitionType(LayoutTransition.APPEARING);
+
+        playerHand.setLayoutTransition(lt);
+        dealerHand.setLayoutTransition(lt);
+        updateHandImages(playerHand);
 
         twist.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
@@ -72,7 +78,7 @@ public class mainActivity extends AppCompatActivity {
                 game.dealCardToCurrentPlayer();
                 view.getPlayerMove("twist");
                 game.handleMove();
-                addImagesTo(playerHand);
+                updateHandImages(playerHand);
 
                 if (log.getBust()) {
                     doResult();
@@ -89,11 +95,10 @@ public class mainActivity extends AppCompatActivity {
 
                 while (log.getPlaying() && !log.getBust()) {
                     game.runDealerTurn();
+                    updateHandImages(dealerHand);
+
                 }
-
-                addImagesTo(dealerHand);
                 doResult();
-
             }
         });
 
@@ -101,9 +106,12 @@ public class mainActivity extends AppCompatActivity {
             @Override
             public void onClick(android.view.View v) {
                 game.endRound();
+
+                updateHandImages(dealerHand);
+
                 start();
 
-                addImagesTo(playerHand);
+                updateHandImages(playerHand);
 
                 result.setText("");
                 buttons.setVisibility(android.view.View.VISIBLE);
@@ -114,7 +122,7 @@ public class mainActivity extends AppCompatActivity {
 
     }
 
-    private void addImagesTo(LinearLayout hand) {
+    private void updateHandImages(LinearLayout hand) {
         hand.removeAllViews();
 
         ArrayList<String> imageNames = view.getCurrentPlayerHandCardImages();
