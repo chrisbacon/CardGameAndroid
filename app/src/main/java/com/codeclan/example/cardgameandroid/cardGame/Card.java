@@ -18,6 +18,6 @@ public class Card {
     }
 
     public String toString() {
-        return "|" + getRank().getShortString() + "-" + getSuit().getShortString() + "|";
+        return getSuit().getShortString() + getRank().getShortString();
     }
 }

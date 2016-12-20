@@ -12,6 +12,10 @@ public class View {
         return player.getName() + ": " + player.getHandString();
     }
 
+    public String getCardFilename(Card card) {
+        return "";
+    }
+
     public String displayDealerHand() {
         Dealer dealer = this.log.getDealer();
         return dealer.getName() + ": " + dealer.getHandString();

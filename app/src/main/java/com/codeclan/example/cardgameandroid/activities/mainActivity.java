@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.*;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ public class mainActivity extends AppCompatActivity {
     Button stick;
     Button reset;
     LinearLayout buttons;
+
+    LinearLayout cards;
 
     TextView dealerHand;
     TextView result;
@@ -49,11 +52,13 @@ public class mainActivity extends AppCompatActivity {
         result = (TextView)findViewById(R.id.result);
 
 
+
         twist = (Button)findViewById(R.id.twist);
         stick = (Button)findViewById(R.id.stick);
         reset = (Button)findViewById(R.id.reset);
 
         buttons = (LinearLayout)findViewById(R.id.buttons);
+        cards = (LinearLayout)findViewById(R.id.cards);
 
         playerHand.setText(view.displayCurrentPlayerHand());
 
@@ -64,6 +69,14 @@ public class mainActivity extends AppCompatActivity {
                 view.getPlayerMove("twist");
                 game.handleMove();
                 playerHand.setText(view.displayCurrentPlayerHand());
+
+                ImageView card = new ImageView(getBaseContext());
+                card.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT));
+                card.setImageResource(R.drawable.cl2);
+
+                cards.addView(card);
 
                 if (log.getBust()) {
                     buttons.setVisibility(android.view.View.INVISIBLE);
@@ -103,6 +116,7 @@ public class mainActivity extends AppCompatActivity {
                 game.dealCardToDealer();
 
                 playerHand.setText(view.displayCurrentPlayerHand());
+
                 dealerHand.setText("");
                 result.setText("");
 

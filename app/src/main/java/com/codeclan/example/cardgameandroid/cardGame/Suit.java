@@ -1,10 +1,10 @@
 package com.codeclan.example.cardgameandroid.cardGame;
 
 public enum Suit {
-    HEARTS("H"),
-    CLUBS("C"),
-    DIAMONDS("D"),
-    SPADES("S");
+    HEARTS("he"),
+    CLUBS("cl"),
+    DIAMONDS("di"),
+    SPADES("sp");
 
     private String shortString;
 
