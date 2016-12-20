@@ -1,7 +1,7 @@
 package com.codeclan.example.cardgameandroid.cardGame;
 import java.util.*;
 
-public abstract class CardCollection {
+public abstract class CardCollection implements Iterable<Card> {
     ArrayList<Card> cards;
 
     public CardCollection() {
@@ -14,6 +14,11 @@ public abstract class CardCollection {
 
     public void addCard(Card card) {
         this.cards.add(card);
+    }
+
+    @Override
+    public Iterator<Card> iterator() {
+        return cards.iterator();
     }
 
     public String toString(String delimeter) {
