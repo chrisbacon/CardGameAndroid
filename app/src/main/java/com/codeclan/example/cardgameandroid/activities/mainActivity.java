@@ -13,6 +13,8 @@ import com.codeclan.example.cardgameandroid.R;
 import com.codeclan.example.cardgameandroid.cardGame.*;
 import com.codeclan.example.cardgameandroid.cardGame.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by user on 16/12/2016.
  */
@@ -28,13 +30,15 @@ public class mainActivity extends AppCompatActivity {
     TextView dealerHand;
     TextView result;
 
+    View view;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final Log log = new Log();
         final Game game = new Game(log);
-        final View view = new View(log);
+        view = new View(log);
 
         game.addPlayer("Player");
         game.addDealer("Dealer");
@@ -61,6 +65,7 @@ public class mainActivity extends AppCompatActivity {
         cards = (LinearLayout)findViewById(R.id.cards);
 
         playerHand.setText(view.displayCurrentPlayerHand());
+        displayCards();
 
         twist.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
@@ -70,13 +75,7 @@ public class mainActivity extends AppCompatActivity {
                 game.handleMove();
                 playerHand.setText(view.displayCurrentPlayerHand());
 
-                ImageView card = new ImageView(getBaseContext());
-                card.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT));
-                card.setImageResource(R.drawable.cl2);
-
-                cards.addView(card);
+                displayCards();
 
                 if (log.getBust()) {
                     buttons.setVisibility(android.view.View.INVISIBLE);
@@ -115,7 +114,11 @@ public class mainActivity extends AppCompatActivity {
                 game.dealCardToCurrentPlayer();
                 game.dealCardToDealer();
 
+
+
+                cards.removeAllViews();
                 playerHand.setText(view.displayCurrentPlayerHand());
+                displayCards();
 
                 dealerHand.setText("");
                 result.setText("");
@@ -126,5 +129,20 @@ public class mainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void displayCards() {
+        cards.removeAllViews();
+
+        ArrayList<String> imageNames = view.getCurrentPlayerHandCardImages();
+        for (String filename : imageNames) {
+            ImageView card = new ImageView(getBaseContext());
+            card.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT));
+            int resID = getResources().getIdentifier(filename , "drawable", getPackageName());
+            card.setImageResource(resID);
+            cards.addView(card);
+        }
     }
 }

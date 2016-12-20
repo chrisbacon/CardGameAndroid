@@ -1,5 +1,7 @@
 package com.codeclan.example.cardgameandroid.cardGame;
 
+import java.util.ArrayList;
+
 public class View {
     private Log log;
 
@@ -12,8 +14,13 @@ public class View {
         return player.getName() + ": " + player.getHandString();
     }
 
-    public String getCardFilename(Card card) {
-        return "";
+    public ArrayList<String> getCurrentPlayerHandCardImages() {
+        ArrayList<String> cardImages = new ArrayList<String>();
+        Player player = log.getCurrentPlayer();
+        for (Card card : player.getHand()) {
+            cardImages.add(card.toString());
+        }
+        return cardImages;
     }
 
     public String displayDealerHand() {

@@ -9,11 +9,11 @@ public enum Rank {
     SEVEN("7"),
     EIGHT("8"),
     NINE("9"),
-    TEN("T"),
-    JACK("J"),
-    QUEEN("Q"),
-    KING("K"),
-    ACE("A");
+    TEN("t"),
+    JACK("j"),
+    QUEEN("q"),
+    KING("k"),
+    ACE("a");
 
     private String shortString;
 
