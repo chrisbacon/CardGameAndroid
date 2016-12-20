@@ -19,7 +19,6 @@ import java.util.ArrayList;
  * Created by user on 16/12/2016.
  */
 public class mainActivity extends AppCompatActivity {
-    TextView playerHand;
     Button twist;
     Button stick;
     Button reset;
@@ -31,13 +30,14 @@ public class mainActivity extends AppCompatActivity {
     TextView result;
 
     View view;
+    Game game;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final Log log = new Log();
-        final Game game = new Game(log);
+        game = new Game(log);
         view = new View(log);
 
         game.addPlayer("Player");
@@ -49,9 +49,6 @@ public class mainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-
-
-        playerHand = (TextView)findViewById(R.id.player_hand);
         dealerHand = (TextView)findViewById(R.id.dealer_hand);
         result = (TextView)findViewById(R.id.result);
 
@@ -63,8 +60,6 @@ public class mainActivity extends AppCompatActivity {
 
         buttons = (LinearLayout)findViewById(R.id.buttons);
         cards = (LinearLayout)findViewById(R.id.cards);
-
-        playerHand.setText(view.displayCurrentPlayerHand());
         displayCards();
 
         twist.setOnClickListener(new android.view.View.OnClickListener() {
@@ -73,14 +68,10 @@ public class mainActivity extends AppCompatActivity {
                 game.dealCardToCurrentPlayer();
                 view.getPlayerMove("twist");
                 game.handleMove();
-                playerHand.setText(view.displayCurrentPlayerHand());
-
                 displayCards();
 
                 if (log.getBust()) {
-                    buttons.setVisibility(android.view.View.INVISIBLE);
-                    game.setResult();
-                    result.setText(view.displayResult());
+                    doResult();
                 }
             }
         });
@@ -90,7 +81,6 @@ public class mainActivity extends AppCompatActivity {
             public void onClick(android.view.View v) {
                 view.getPlayerMove("stick");
                 game.handleMove();
-                playerHand.setText(view.displayCurrentPlayerHand());
 
                 game.nextPlayer();
 
@@ -99,9 +89,7 @@ public class mainActivity extends AppCompatActivity {
                     dealerHand.setText(view.displayDealerHand());
                 }
 
-                buttons.setVisibility(android.view.View.INVISIBLE);
-                game.setResult();
-                result.setText(view.displayResult());
+                doResult();
 
             }
         });
@@ -114,10 +102,6 @@ public class mainActivity extends AppCompatActivity {
                 game.dealCardToCurrentPlayer();
                 game.dealCardToDealer();
 
-
-
-                cards.removeAllViews();
-                playerHand.setText(view.displayCurrentPlayerHand());
                 displayCards();
 
                 dealerHand.setText("");
@@ -144,5 +128,11 @@ public class mainActivity extends AppCompatActivity {
             card.setImageResource(resID);
             cards.addView(card);
         }
+    }
+
+    private void doResult() {
+        buttons.setVisibility(android.view.View.INVISIBLE);
+        game.setResult();
+        result.setText(view.displayResult());
     }
 }
