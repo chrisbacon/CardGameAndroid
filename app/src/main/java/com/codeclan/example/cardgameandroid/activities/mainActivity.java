@@ -1,9 +1,7 @@
 package com.codeclan.example.cardgameandroid.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.*;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,45 +20,51 @@ public class mainActivity extends AppCompatActivity {
     Button twist;
     Button stick;
     Button reset;
+
     LinearLayout buttons;
+    LinearLayout playerHand;
+    LinearLayout dealerHand;
 
-    LinearLayout cards;
-
-    TextView dealerHand;
+    TextView playerName;
+    TextView dealerName;
     TextView result;
 
     View view;
     Game game;
+    Log log;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Log log = new Log();
+        log = new Log();
         game = new Game(log);
         view = new View(log);
 
         game.addPlayer("Player");
         game.addDealer("Dealer");
 
-        game.setUp();
-        game.dealCardToCurrentPlayer();
-        game.dealCardToDealer();
+        start();
 
         setContentView(R.layout.activity_main);
 
-        dealerHand = (TextView)findViewById(R.id.dealer_hand);
+        playerName = (TextView)findViewById(R.id.player_name);
+        playerName.setText("Player");
+
+        dealerName = (TextView)findViewById(R.id.dealer_name);
+        dealerName.setText("Dealer");
+
         result = (TextView)findViewById(R.id.result);
-
-
 
         twist = (Button)findViewById(R.id.twist);
         stick = (Button)findViewById(R.id.stick);
         reset = (Button)findViewById(R.id.reset);
 
         buttons = (LinearLayout)findViewById(R.id.buttons);
-        cards = (LinearLayout)findViewById(R.id.cards);
-        displayCards();
+        playerHand = (LinearLayout)findViewById(R.id.player_hand);
+        dealerHand = (LinearLayout)findViewById(R.id.dealer_hand);
+
+        addImagesTo(playerHand);
 
         twist.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
@@ -68,7 +72,7 @@ public class mainActivity extends AppCompatActivity {
                 game.dealCardToCurrentPlayer();
                 view.getPlayerMove("twist");
                 game.handleMove();
-                displayCards();
+                addImagesTo(playerHand);
 
                 if (log.getBust()) {
                     doResult();
@@ -81,14 +85,13 @@ public class mainActivity extends AppCompatActivity {
             public void onClick(android.view.View v) {
                 view.getPlayerMove("stick");
                 game.handleMove();
-
                 game.nextPlayer();
 
                 while (log.getPlaying() && !log.getBust()) {
                     game.runDealerTurn();
-                    dealerHand.setText(view.displayDealerHand());
                 }
 
+                addImagesTo(dealerHand);
                 doResult();
 
             }
@@ -98,15 +101,11 @@ public class mainActivity extends AppCompatActivity {
             @Override
             public void onClick(android.view.View v) {
                 game.endRound();
-                game.setUp();
-                game.dealCardToCurrentPlayer();
-                game.dealCardToDealer();
+                start();
 
-                displayCards();
+                addImagesTo(playerHand);
 
-                dealerHand.setText("");
                 result.setText("");
-
                 buttons.setVisibility(android.view.View.VISIBLE);
 
             }
@@ -115,8 +114,8 @@ public class mainActivity extends AppCompatActivity {
 
     }
 
-    private void displayCards() {
-        cards.removeAllViews();
+    private void addImagesTo(LinearLayout hand) {
+        hand.removeAllViews();
 
         ArrayList<String> imageNames = view.getCurrentPlayerHandCardImages();
         for (String filename : imageNames) {
@@ -126,7 +125,7 @@ public class mainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.MATCH_PARENT));
             int resID = getResources().getIdentifier(filename , "drawable", getPackageName());
             card.setImageResource(resID);
-            cards.addView(card);
+            hand.addView(card);
         }
     }
 
@@ -134,5 +133,11 @@ public class mainActivity extends AppCompatActivity {
         buttons.setVisibility(android.view.View.INVISIBLE);
         game.setResult();
         result.setText(view.displayResult());
+    }
+
+    private void start() {
+        game.setUp();
+        game.dealCardToCurrentPlayer();
+        game.dealCardToDealer();
     }
 }
