@@ -1,6 +1,5 @@
 package com.codeclan.example.cardgameandroid.activities;
 
-import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 import com.codeclan.example.cardgameandroid.R;
 import com.codeclan.example.cardgameandroid.cardGame.*;
 import com.codeclan.example.cardgameandroid.cardGame.View;
-
-import java.util.ArrayList;
 
 /**
  * Created by user on 16/12/2016.
@@ -66,7 +63,8 @@ public class mainActivity extends AppCompatActivity {
         playerHand = (LinearLayout)findViewById(R.id.player_hand);
         dealerHand = (LinearLayout)findViewById(R.id.dealer_hand);
 
-        updateHandImages(playerHand);
+        ObjectAnimator animator = prepareAnimator(playerHand);
+        animator.start();
 
         twist.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
@@ -74,7 +72,8 @@ public class mainActivity extends AppCompatActivity {
                 game.dealCardToCurrentPlayer();
                 view.getPlayerMove("twist");
                 game.handleMove();
-                updateHandImages(playerHand);
+                ObjectAnimator animator = prepareAnimator(playerHand);
+                animator.start();
 
                 if (log.getBust()) {
                     doResult();
@@ -92,7 +91,8 @@ public class mainActivity extends AppCompatActivity {
                 while (log.getPlaying() && !log.getBust()) {
                     game.runDealerTurn();
                     if (log.getPlaying()) {
-                        updateHandImages(dealerHand);
+                        ObjectAnimator animator = prepareAnimator(dealerHand);
+                        animator.start();
                     }
                 }
 
@@ -110,7 +110,8 @@ public class mainActivity extends AppCompatActivity {
 
                 start();
 
-                updateHandImages(playerHand);
+                ObjectAnimator animator = prepareAnimator(playerHand);
+                animator.start();
 
                 result.setText("");
                 buttons.setVisibility(android.view.View.VISIBLE);
@@ -119,7 +120,7 @@ public class mainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateHandImages(LinearLayout hand) {
+    private ObjectAnimator prepareAnimator(LinearLayout hand) {
 
         String fileName = view.getLastCardImageFileName();
 
@@ -133,12 +134,8 @@ public class mainActivity extends AppCompatActivity {
         card.setImageResource(resID);
         hand.addView(card);
 
-        ObjectAnimator.ofFloat(card, "translationX", 600, 0)
-                .setDuration(300)
-                .start();
-
-
-        android.util.Log.d("mainActivity", log.getCurrentPlayer().getHandString());
+        return ObjectAnimator.ofFloat(card, "translationX", 600, 0)
+                .setDuration(300);
     }
 
     private void doResult() {
