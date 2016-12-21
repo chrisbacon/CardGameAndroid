@@ -44,6 +44,15 @@ public class HandTest {
     }
 
     @Test
+    public void getLastCardTest() {
+        hand.addCard(card);
+        Card card2 = new Card(Suit.HEARTS, Rank.FIVE);
+        hand.addCard(card2);
+
+        assertEquals(card2, hand.getLastCard());
+    }
+
+    @Test
     public void canReturnCardsToDealer() {
         //create mock dealer, add card to hand.
         Dealer dealerMock = mock(Dealer.class);

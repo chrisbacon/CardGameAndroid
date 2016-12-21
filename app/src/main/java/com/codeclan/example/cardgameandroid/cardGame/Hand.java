@@ -25,6 +25,10 @@ public class Hand extends CardCollection {
         return new ArrayList<Card>(cards);
     }
 
+    public Card getLastCard() {
+        return cards.get(getSize() - 1);
+    }
+
     public void emptyCards() {
         cards.clear();
     }
