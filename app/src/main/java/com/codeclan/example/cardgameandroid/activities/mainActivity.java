@@ -91,8 +91,11 @@ public class mainActivity extends AppCompatActivity {
 
                 while (log.getPlaying() && !log.getBust()) {
                     game.runDealerTurn();
-                    updateHandImages(dealerHand);
+                    if (log.getPlaying()) {
+                        updateHandImages(dealerHand);
+                    }
                 }
+
                 doResult();
             }
         });
@@ -133,6 +136,9 @@ public class mainActivity extends AppCompatActivity {
         ObjectAnimator.ofFloat(card, "translationX", 600, 0)
                 .setDuration(300)
                 .start();
+
+
+        android.util.Log.d("mainActivity", log.getCurrentPlayer().getHandString());
     }
 
     private void doResult() {
@@ -144,6 +150,5 @@ public class mainActivity extends AppCompatActivity {
     private void start() {
         game.setUp();
         game.dealCardToCurrentPlayer();
-        game.dealCardToDealer();
     }
 }
