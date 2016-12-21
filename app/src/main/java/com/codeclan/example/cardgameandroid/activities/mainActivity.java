@@ -102,7 +102,8 @@ public class mainActivity extends AppCompatActivity {
             public void onClick(android.view.View v) {
                 game.endRound();
 
-                updateHandImages(dealerHand);
+                dealerHand.removeAllViews();
+                playerHand.removeAllViews();
 
                 start();
 
@@ -116,23 +117,20 @@ public class mainActivity extends AppCompatActivity {
     }
 
     private void updateHandImages(LinearLayout hand) {
-        hand.removeAllViews();
-        ImageView lastCard = new ImageView(getBaseContext());
-        ArrayList<String> imageNames = view.getCurrentPlayerHandCardImages();
-        for (String filename : imageNames) {
-            ImageView card = new ImageView(getBaseContext());
 
-            card.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
+        String fileName = view.getLastCardImageFileName();
 
-            int resID = getResources().getIdentifier(filename , "drawable", getPackageName());
-            card.setImageResource(resID);
-            hand.addView(card);
+        ImageView card = new ImageView(getBaseContext());
 
-            lastCard = card;
-        }
-        ObjectAnimator.ofFloat(lastCard, "translationX", 600, 0)
+        card.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        int resID = getResources().getIdentifier(fileName , "drawable", getPackageName());
+        card.setImageResource(resID);
+        hand.addView(card);
+
+        ObjectAnimator.ofFloat(card, "translationX", 600, 0)
                 .setDuration(300)
                 .start();
     }
