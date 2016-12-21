@@ -15,12 +15,18 @@ public class View {
     }
 
     public ArrayList<String> getCurrentPlayerHandCardImages() {
-        ArrayList<String> cardImages = new ArrayList<String>();
+        ArrayList<String> cardImages = new ArrayList<>();
         Player player = log.getCurrentPlayer();
         for (Card card : player.getHand()) {
             cardImages.add(card.toString());
         }
         return cardImages;
+    }
+
+    public String getLastCardImageFileName() {
+        Player player = log.getCurrentPlayer();
+
+        return player.getHand().getLastCard().toString();
     }
 
     public String displayDealerHand() {
