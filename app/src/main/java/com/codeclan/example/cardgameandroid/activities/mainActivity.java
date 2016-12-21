@@ -1,6 +1,7 @@
 package com.codeclan.example.cardgameandroid.activities;
 
 import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -65,11 +66,6 @@ public class mainActivity extends AppCompatActivity {
         playerHand = (LinearLayout)findViewById(R.id.player_hand);
         dealerHand = (LinearLayout)findViewById(R.id.dealer_hand);
 
-        LayoutTransition lt = new LayoutTransition();
-        lt.disableTransitionType(LayoutTransition.APPEARING);
-
-        playerHand.setLayoutTransition(lt);
-        dealerHand.setLayoutTransition(lt);
         updateHandImages(playerHand);
 
         twist.setOnClickListener(new android.view.View.OnClickListener() {
@@ -96,7 +92,6 @@ public class mainActivity extends AppCompatActivity {
                 while (log.getPlaying() && !log.getBust()) {
                     game.runDealerTurn();
                     updateHandImages(dealerHand);
-
                 }
                 doResult();
             }
@@ -118,23 +113,28 @@ public class mainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void updateHandImages(LinearLayout hand) {
         hand.removeAllViews();
-
+        ImageView lastCard = new ImageView(getBaseContext());
         ArrayList<String> imageNames = view.getCurrentPlayerHandCardImages();
         for (String filename : imageNames) {
             ImageView card = new ImageView(getBaseContext());
+
             card.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT));
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+
             int resID = getResources().getIdentifier(filename , "drawable", getPackageName());
             card.setImageResource(resID);
             hand.addView(card);
+
+            lastCard = card;
         }
+        ObjectAnimator.ofFloat(lastCard, "translationX", 600, 0)
+                .setDuration(300)
+                .start();
     }
 
     private void doResult() {
